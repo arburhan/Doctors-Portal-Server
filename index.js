@@ -44,12 +44,12 @@ async function run() {
                 // set available to slots to make it easier 
                 service.slots = available;
             })
-            res.send(bookings);
+            res.send(services);
 
         })
 
         // booking api
-        app.post('/bookings', async (req, res) => {
+        app.post('/booking', async (req, res) => {
             const booking = req.body;
             const query = { treatment: booking.treatment, date: booking.date, patient: booking.patient }
             const exists = await bookingCollection.findOne(query);
