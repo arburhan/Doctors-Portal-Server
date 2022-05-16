@@ -16,13 +16,22 @@ async function run() {
     try {
         await client.connect();
         const treatmentCollection = client.db('doctors_portal').collection('treatment_schedule');
+        const bookingCollection = client.db('doctors_portal').collection('bookings');
 
-        app.get('/service', async (req, res) => {
+        app.get('/services', async (req, res) => {
             const query = {};
             const cursor = treatmentCollection.find(query);
             const services = await cursor.toArray();
             res.send(services);
-        })
+        });
+
+        // booking api
+        app.post('/bookings', async (req, res) => {
+            const booking = req.body;
+            const result = await bookingCollection.insertOne(booking);
+            res.send(result);
+        });
+
 
     }
     finally { }
