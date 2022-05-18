@@ -46,6 +46,12 @@ async function run() {
             const services = await cursor.toArray();
             res.send(services);
         });
+        // all users
+        app.get('/users', async (req, res) => {
+            const users = await usersCollection.find().toArray();
+            res.send(users);
+        });
+
         // user collection
         app.put('/user/:email', async (req, res) => {
             const email = req.params.email;
